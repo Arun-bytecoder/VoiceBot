@@ -1,4 +1,4 @@
-# 🎙️ Arunachalam's Voice Bot
+#  Voice Bot
 
 A personal voice bot that answers questions about Arunachalam — his life story, skills, growth areas, and personality. Built with Groq (LLaMA 3) + Web Speech API, deployed on Vercel.
 
