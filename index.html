@@ -9,17 +9,15 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      /* Professional Slate & Deep Blue Palette */
-      --bg: #0f172a;        /* Deep Slate Background */
-      --surface: #1e293b;   /* Sleek Dark Slate Panels */
-      --border: #334155;    /* Clean Borders */
-      --accent: #3b82f6;    /* Premium Corporate Blue */
-      --accent-hover: #2563eb;
-      --text: #f8fafc;      /* Crisp White Text */
-      --muted: #64748b;     /* Slate Gray for secondary text */
-      --card: #1e293b;      /* Panel backgrounds */
-      --danger: #ef4444;    /* Red for Recording State */
-      --success: #10b981;   /* Emerald Green for Active Playback */
+      --bg: #0a0a0f;
+      --surface: #111118;
+      --border: #1e1e2e;
+      --accent: #7c6dfa;
+      --accent2: #fa6d9a;
+      --accent3: #6dfacc;
+      --text: #e8e8f0;
+      --muted: #6b6b85;
+      --card: #13131d;
     }
 
     html, body {
@@ -30,29 +28,34 @@
       overflow-x: hidden;
     }
 
-    /* Subtle, professional technical grid background */
+    /* Animated background grid */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
       background-image:
-        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
-      background-size: 40px 40px;
+        linear-gradient(rgba(124,109,250,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124,109,250,0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
       pointer-events: none;
       z-index: 0;
     }
 
-    /* Soft, non-neon radial background drop */
+    /* Radial glow */
     body::after {
       content: '';
       position: fixed;
-      top: -20%;
+      top: -30%;
       left: 50%;
       transform: translateX(-50%);
-      width: 70vw;
-      height: 70vw;
-      background: radial-gradient(circle at center, rgba(59, 130, 246, 0.05) 0%, transparent 70%);
+      width: 80vw;
+      height: 80vw;
+      max-width: 900px;
+      max-height: 900px;
+      background: radial-gradient(ellipse at center,
+        rgba(124,109,250,0.08) 0%,
+        rgba(250,109,154,0.04) 40%,
+        transparent 70%);
       pointer-events: none;
       z-index: 0;
     }
@@ -76,7 +79,7 @@
       flex-direction: column;
       align-items: center;
       gap: 16px;
-      margin-bottom: 48px;
+      margin-bottom: 56px;
       animation: fadeUp 0.8s ease both;
     }
 
@@ -97,21 +100,21 @@
     .badge-dot {
       width: 6px; height: 6px;
       border-radius: 50%;
-      background: var(--success);
+      background: var(--accent3);
       animation: pulse 2s ease infinite;
     }
 
     h1 {
       font-family: 'Syne', sans-serif;
-      font-size: clamp(2.2rem, 6vw, 3.5rem);
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
       font-weight: 800;
-      line-height: 1.1;
+      line-height: 1.05;
       text-align: center;
       letter-spacing: -0.02em;
     }
 
     h1 .name {
-      background: linear-gradient(135deg, var(--accent) 0%, #60a5fa 100%);
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -123,7 +126,7 @@
       text-align: center;
       letter-spacing: 0.02em;
       line-height: 1.7;
-      max-width: 460px;
+      max-width: 420px;
     }
 
     /* Suggestion chips */
@@ -148,19 +151,20 @@
     .chip {
       padding: 8px 16px;
       border: 1px solid var(--border);
-      border-radius: 6px;
+      border-radius: 100px;
       font-size: 12px;
       font-family: 'DM Mono', monospace;
       color: var(--muted);
       background: var(--card);
       cursor: pointer;
       transition: all 0.2s ease;
+      white-space: nowrap;
     }
 
     .chip:hover {
       border-color: var(--accent);
       color: var(--text);
-      background: rgba(59, 130, 246, 0.08);
+      background: rgba(124,109,250,0.08);
     }
 
     /* Chat area */
@@ -169,7 +173,7 @@
       flex: 1;
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 16px;
       margin-bottom: 32px;
       min-height: 180px;
       animation: fadeUp 0.8s 0.15s ease both;
@@ -177,7 +181,7 @@
 
     .message {
       display: flex;
-      gap: 14px;
+      gap: 12px;
       align-items: flex-start;
       animation: fadeUp 0.4s ease both;
     }
@@ -185,40 +189,34 @@
     .message.user { flex-direction: row-reverse; }
 
     .avatar {
-      width: 36px; height: 36px;
-      border-radius: 8px;
+      width: 32px; height: 32px;
+      border-radius: 50%;
       flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
       font-family: 'Syne', sans-serif;
     }
 
     .avatar.bot {
-      background: var(--accent);
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
       color: #fff;
     }
 
     .avatar.user-av {
-      background: var(--surface);
-      border: 1px solid var(--border);
+      background: var(--border);
       color: var(--muted);
-    }
-
-    .avatar svg {
-      width: 16px;
-      height: 16px;
-      fill: currentColor;
+      font-size: 16px;
     }
 
     .bubble {
-      max-width: 80%;
+      max-width: 78%;
       padding: 14px 18px;
-      border-radius: 8px;
-      font-size: 14px;
-      line-height: 1.6;
+      border-radius: 16px;
+      font-size: 13.5px;
+      line-height: 1.7;
       border: 1px solid var(--border);
     }
 
@@ -226,7 +224,7 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: 8px;
+      gap: 6px;
       max-width: 80%;
     }
 
@@ -235,35 +233,33 @@
     }
 
     .speak-btn {
-      background: var(--surface);
+      background: none;
       border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 4px 10px;
-      font-size: 11px;
+      border-radius: 20px;
+      padding: 3px 10px;
+      font-size: 12px;
       color: var(--muted);
       cursor: pointer;
       transition: all 0.2s;
       display: flex;
       align-items: center;
-      gap: 6px;
-      font-family: 'DM Mono', monospace;
+      gap: 4px;
     }
-    .speak-btn svg { width: 12px; height: 12px; fill: currentColor; }
-    .speak-btn:hover { border-color: var(--accent); color: var(--text); }
-    .speak-btn.active { border-color: var(--danger); color: var(--danger); }
+    .speak-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .speak-btn.active { border-color: var(--accent3); color: var(--accent3); }
 
     .message.bot .bubble {
       background: var(--card);
       border-color: var(--border);
       color: var(--text);
-      border-top-left-radius: 0;
+      border-top-left-radius: 4px;
     }
 
     .message.user .bubble {
-      background: rgba(59, 130, 246, 0.05);
-      border-color: rgba(59, 130, 246, 0.2);
+      background: rgba(124,109,250,0.12);
+      border-color: rgba(124,109,250,0.25);
       color: var(--text);
-      border-top-right-radius: 0;
+      border-top-right-radius: 4px;
     }
 
     /* Typing indicator */
@@ -271,24 +267,24 @@
       display: none;
       gap: 5px;
       align-items: center;
-      padding: 14px 18px;
+      padding: 16px 18px;
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 8px;
-      border-top-left-radius: 0;
+      border-radius: 16px;
+      border-top-left-radius: 4px;
       width: fit-content;
     }
 
     .typing-indicator.visible { display: flex; }
 
     .dot {
-      width: 6px; height: 6px;
+      width: 7px; height: 7px;
       border-radius: 50%;
       background: var(--accent);
       animation: bounce 1.2s ease infinite;
     }
-    .dot:nth-child(2) { animation-delay: 0.2s; opacity: 0.7; }
-    .dot:nth-child(3) { animation-delay: 0.4s; opacity: 0.4; }
+    .dot:nth-child(2) { animation-delay: 0.2s; background: var(--accent2); }
+    .dot:nth-child(3) { animation-delay: 0.4s; background: var(--accent3); }
 
     /* Controls */
     .controls {
@@ -296,94 +292,87 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 24px;
-      position: relative;
+      gap: 20px;
       animation: fadeUp 0.8s 0.3s ease both;
     }
 
-    /* Professional Background Voice Wave Animation */
-    .background-wave {
-      position: absolute;
-      top: -30px;
-      left: 50%;
-      transform: translateX(-50%);
+    /* Mic button */
+    .mic-wrapper {
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 4px;
-      height: 110px;
-      z-index: 0;
-      opacity: 0;
-      transition: opacity 0.3s ease, transform 0.3s ease;
-      pointer-events: none;
     }
 
-    .background-wave.active { 
-      opacity: 1;
-    }
-
-    .wave-bar {
-      width: 4px;
-      background: var(--accent);
-      border-radius: 2px;
-      height: 6px;
-      transition: height 0.1s ease;
-    }
-    
-    .background-wave.speaking .wave-bar {
-      background: var(--success);
-    }
-
-    /* Mic button */
-    .mic-btn {
-      width: 72px; height: 72px;
+    .mic-ring {
+      position: absolute;
+      width: 88px; height: 88px;
       border-radius: 50%;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--accent);
+      border: 2px solid var(--accent);
+      opacity: 0;
+      transform: scale(1);
+      transition: opacity 0.3s;
+    }
+
+    .mic-ring.active {
+      opacity: 0.4;
+      animation: ringPulse 1.5s ease infinite;
+    }
+
+    .mic-ring-2 {
+      position: absolute;
+      width: 110px; height: 110px;
+      border-radius: 50%;
+      border: 1px solid var(--accent2);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .mic-ring-2.active {
+      opacity: 0.2;
+      animation: ringPulse 1.5s 0.3s ease infinite;
+    }
+
+    .mic-btn {
+      width: 68px; height: 68px;
+      border-radius: 50%;
+      border: none;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff;
+      font-size: 26px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 0 40px rgba(124,109,250,0.3);
       position: relative;
       z-index: 1;
     }
 
-    .mic-btn svg { width: 26px; height: 26px; fill: currentColor; }
-
-    .mic-btn:hover { 
-      border-color: var(--accent); 
-      color: var(--text);
-      transform: translateY(-2px); 
-      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.15);
-    }
-    .mic-btn:active { transform: translateY(1px); }
+    .mic-btn:hover { transform: scale(1.06); }
+    .mic-btn:active { transform: scale(0.96); }
 
     .mic-btn.recording {
-      background: var(--danger);
-      color: #fff;
-      border-color: var(--danger);
-      box-shadow: 0 0 24px rgba(239, 68, 68, 0.4);
+      background: linear-gradient(135deg, var(--accent2), #ff4466);
+      box-shadow: 0 0 50px rgba(250,109,154,0.4);
+      animation: micPulse 1s ease infinite;
     }
 
     /* Text input row */
     .input-row {
       display: flex;
       width: 100%;
-      gap: 12px;
-      position: relative;
-      z-index: 1;
+      gap: 10px;
     }
 
     .text-input {
       flex: 1;
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 14px 18px;
-      font-size: 13.5px;
+      border-radius: 12px;
+      padding: 12px 18px;
+      font-size: 13px;
       font-family: 'DM Mono', monospace;
       color: var(--text);
       outline: none;
@@ -394,61 +383,70 @@
     .text-input:focus { border-color: var(--accent); }
 
     .send-btn {
-      padding: 0 22px;
-      background: var(--accent);
-      border: none;
-      border-radius: 8px;
-      color: #fff;
-      font-size: 13.5px;
-      font-weight: 600;
-      font-family: 'DM Mono', monospace;
+      padding: 12px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--text);
+      font-size: 16px;
       cursor: pointer;
-      transition: background 0.2s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      transition: all 0.2s ease;
     }
 
     .send-btn:hover {
-      background: var(--accent-hover);
+      border-color: var(--accent);
+      color: var(--accent);
     }
 
     /* Status text */
     .status {
-      font-size: 12px;
-      letter-spacing: 0.04em;
+      font-size: 11px;
+      letter-spacing: 0.08em;
       color: var(--muted);
       text-align: center;
       min-height: 18px;
       transition: color 0.3s;
-      position: relative;
-      z-index: 1;
     }
 
-    .status.recording { color: var(--danger); }
+    .status.recording { color: var(--accent2); }
     .status.thinking { color: var(--accent); }
-    .status.speaking { color: var(--success); }
+    .status.speaking { color: var(--accent3); }
+
+    /* Volume bar */
+    .vol-bar {
+      display: flex;
+      gap: 3px;
+      align-items: center;
+      justify-content: center;
+      height: 20px;
+    }
+
+    .vol-bar span {
+      display: block;
+      width: 3px;
+      background: var(--accent2);
+      border-radius: 2px;
+      height: 4px;
+      transition: height 0.1s;
+    }
 
     /* Empty state */
     .empty-state {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 14px;
-      padding: 48px;
+      gap: 8px;
+      padding: 40px;
       color: var(--muted);
       font-size: 13px;
       text-align: center;
-      border: 1px dashed var(--border);
-      border-radius: 8px;
-      background: rgba(30, 41, 59, 0.2);
     }
 
-    .empty-state svg { width: 32px; height: 32px; fill: var(--muted); opacity: 0.5; }
+    .empty-state .icon { font-size: 36px; opacity: 0.4; }
 
     /* Animations */
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(14px); }
+      from { opacity: 0; transform: translateY(18px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
@@ -462,10 +460,20 @@
       30%            { transform: translateY(-6px); }
     }
 
+    @keyframes ringPulse {
+      0%   { transform: scale(1); opacity: 0.4; }
+      100% { transform: scale(1.4); opacity: 0; }
+    }
+
+    @keyframes micPulse {
+      0%, 100% { box-shadow: 0 0 40px rgba(250,109,154,0.4); }
+      50%       { box-shadow: 0 0 60px rgba(250,109,154,0.7); }
+    }
+
     /* Mobile tweaks */
     @media (max-width: 480px) {
       .chips { gap: 6px; }
-      .chip { font-size: 11px; padding: 7px 12px; }
+      .chip { font-size: 11px; padding: 7px 13px; }
       .bubble { font-size: 13px; max-width: 88%; }
     }
   </style>
@@ -473,34 +481,38 @@
 <body>
 <div class="container">
 
+  <!-- Header -->
   <div class="header">
     <div class="badge">
       <span class="badge-dot"></span>
-      Interactive Voice Assistant
+      Interactive Voice Bot
     </div>
     <h1>Talk to <span class="name">Arunachalam</span></h1>
     <p class="subtitle">Ask me anything about my journey, skills, and aspirations.<br>Speak or type — I'll respond in my own words.</p>
   </div>
 
+  <!-- Suggestions -->
   <p class="chips-label">Try asking →</p>
   <div class="chips">
     <span class="chip" onclick="sendChip(this)">Tell me your life story</span>
+    <span class="chip" onclick="sendChip(this)">Tell me about yourself</span>
     <span class="chip" onclick="sendChip(this)">What's your #1 superpower?</span>
     <span class="chip" onclick="sendChip(this)">Top 3 areas you want to grow in?</span>
     <span class="chip" onclick="sendChip(this)">What do coworkers misunderstand about you?</span>
     <span class="chip" onclick="sendChip(this)">How do you push your limits?</span>
+    <span class="chip" onclick="sendChip(this)">what is your Hobbies and Interests?</span>
     <span class="chip" onclick="sendChip(this)">Why did you choose AI and Data Science?</span>
   </div>
 
+  <!-- Chat -->
   <div class="chat-area" id="chatArea">
     <div class="empty-state">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5-3c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
-      </svg>
-      <div>Click the microphone or type a question below to start</div>
+      <div class="icon">🎙️</div>
+      <div>Press the mic or type a question below</div>
     </div>
   </div>
 
+  <!-- Typing indicator (inside chat flow) -->
   <div class="message bot" id="typingRow" style="display:none;">
     <div class="avatar bot">A</div>
     <div class="typing-indicator visible">
@@ -510,26 +522,25 @@
     </div>
   </div>
 
+  <!-- Controls -->
   <div class="controls">
-    
-    <div class="background-wave" id="bgWave">
-      <div class="wave-bar" id="v1"></div>
-      <div class="wave-bar" id="v2"></div>
-      <div class="wave-bar" id="v3"></div>
-      <div class="wave-bar" id="v4"></div>
-      <div class="wave-bar" id="v5"></div>
-      <div class="wave-bar" id="v6"></div>
-      <div class="wave-bar" id="v7"></div>
+    <!-- Volume bars (visible while recording) -->
+    <div class="vol-bar" id="volBar" style="opacity:0;">
+      <span id="v1"></span><span id="v2"></span><span id="v3"></span>
+      <span id="v4"></span><span id="v5"></span><span id="v6"></span>
+      <span id="v7"></span>
     </div>
 
-    <button class="mic-btn" id="micBtn" onclick="toggleMic()" title="Click to speak">
-      <svg id="micIcon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5-3c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
-      </svg>
-    </button>
+    <!-- Mic button -->
+    <div class="mic-wrapper">
+      <div class="mic-ring" id="ring1"></div>
+      <div class="mic-ring-2" id="ring2"></div>
+      <button class="mic-btn" id="micBtn" onclick="toggleMic()" title="Hold to speak">🎤</button>
+    </div>
 
     <p class="status" id="status">Click the mic to speak</p>
 
+    <!-- Text input -->
     <div class="input-row">
       <input
         class="text-input"
@@ -539,7 +550,7 @@
         onkeydown="if(event.key==='Enter') sendText()"
         autocomplete="off"
       />
-      <button class="send-btn" onclick="sendText()" title="Send">Send</button>
+      <button class="send-btn" onclick="sendText()" title="Send">➤</button>
     </div>
   </div>
 
@@ -548,10 +559,11 @@
 <script>
   const chatArea = document.getElementById('chatArea');
   const micBtn = document.getElementById('micBtn');
-  const micIcon = document.getElementById('micIcon');
   const statusEl = document.getElementById('status');
   const typingRow = document.getElementById('typingRow');
-  const bgWave = document.getElementById('bgWave');
+  const ring1 = document.getElementById('ring1');
+  const ring2 = document.getElementById('ring2');
+  const volBar = document.getElementById('volBar');
   const textInput = document.getElementById('textInput');
 
   let messages = [];
@@ -559,7 +571,6 @@
   let isRecording = false;
   let speaking = false;
   let currentUtterance = null;
-  let animationFrameId = null;
 
   // Speech Recognition setup
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -588,12 +599,7 @@
 
     const avatar = document.createElement('div');
     avatar.className = role === 'bot' ? 'avatar bot' : 'avatar user-av';
-    
-    if (role === 'bot') {
-      avatar.textContent = 'A';
-    } else {
-      avatar.innerHTML = `<svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5-4-8-4z"/></svg>`;
-    }
+    avatar.textContent = role === 'bot' ? 'A' : '👤';
 
     const bubbleWrap = document.createElement('div');
     bubbleWrap.className = 'bubble-wrap';
@@ -607,34 +613,28 @@
       const speakBtn = document.createElement('button');
       speakBtn.className = 'speak-btn';
       speakBtn.title = 'Read aloud';
-      speakBtn.innerHTML = `<svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg> <span>Listen</span>`;
-      
+      speakBtn.innerHTML = '🔊';
       speakBtn.onclick = () => {
         if (window.speechSynthesis.speaking) {
           window.speechSynthesis.cancel();
-          speakBtn.innerHTML = `<svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg> <span>Listen</span>`;
+          speakBtn.innerHTML = '🔊';
           speakBtn.classList.remove('active');
-          stopVoiceAnimation();
         } else {
+          // Reset all other speak buttons
           document.querySelectorAll('.speak-btn').forEach(b => {
-            b.innerHTML = `<svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg> <span>Listen</span>`; 
-            b.classList.remove('active');
+            b.innerHTML = '🔊'; b.classList.remove('active');
           });
-          speakBtn.innerHTML = `<svg viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg> <span>Stop</span>`;
+          speakBtn.innerHTML = '⏹';
           speakBtn.classList.add('active');
-          
           const utter = new SpeechSynthesisUtterance(text);
           utter.rate = 0.95; utter.pitch = 1.0; utter.volume = 1;
           const voice = getMaleVoice();
           if (voice) utter.voice = voice;
           utter.rate = 0.92;
           utter.pitch = 0.85;
-          
-          utter.onstart = () => startVoiceAnimation('speaking');
           utter.onend = utter.onerror = () => {
-            speakBtn.innerHTML = `<svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg> <span>Listen</span>`;
+            speakBtn.innerHTML = '🔊';
             speakBtn.classList.remove('active');
-            stopVoiceAnimation();
           };
           window.speechSynthesis.speak(utter);
         }
@@ -657,9 +657,9 @@
   async function sendMessage(userText) {
     if (!userText.trim() || speaking) return;
 
+    // Stop any current speech
     if (window.speechSynthesis.speaking) {
       window.speechSynthesis.cancel();
-      stopVoiceAnimation();
     }
 
     addMessage('user', userText);
@@ -723,11 +723,8 @@
     if (voice) utter.voice = voice;
     speaking = true;
     setStatus('Speaking...', 'speaking');
-    
-    startVoiceAnimation('speaking');
-
-    utter.onend = () => { speaking = false; setStatus('Click the mic to speak'); stopVoiceAnimation(); };
-    utter.onerror = () => { speaking = false; setStatus('Click the mic to speak'); stopVoiceAnimation(); };
+    utter.onend = () => { speaking = false; setStatus('Click the mic to speak'); };
+    utter.onerror = () => { speaking = false; setStatus('Click the mic to speak'); };
     currentUtterance = utter;
     window.speechSynthesis.speak(utter);
   }
@@ -743,10 +740,7 @@
   }
 
   function startRecording() {
-    if (window.speechSynthesis.speaking) {
-      window.speechSynthesis.cancel();
-      stopVoiceAnimation();
-    }
+    if (window.speechSynthesis.speaking) window.speechSynthesis.cancel();
 
     recognition = new SpeechRecognition();
     recognition.lang = 'en-IN';
@@ -761,9 +755,12 @@
       isRecording = true;
       finalTranscript = '';
       micBtn.classList.add('recording');
-      micIcon.innerHTML = `<svg viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>`;
+      micBtn.textContent = '⏹';
+      ring1.classList.add('active');
+      ring2.classList.add('active');
+      volBar.style.opacity = '1';
       setStatus('Listening... (speak freely, pause when done)', 'recording');
-      startVoiceAnimation('recording');
+      animateVolBars();
     };
 
     recognition.onresult = (e) => {
@@ -776,8 +773,10 @@
           interim += e.results[i][0].transcript;
         }
       }
+      // Show live transcript in input box
       textInput.value = finalTranscript + interim;
 
+      // Reset silence timer — send after 1.8s of silence
       clearTimeout(silenceTimer);
       silenceTimer = setTimeout(() => {
         const toSend = finalTranscript.trim() || interim.trim();
@@ -800,6 +799,7 @@
     };
 
     recognition.onend = () => {
+      // If still recording (unexpected end), restart to keep listening
       if (isRecording) {
         try { recognition.start(); } catch(e) {}
       }
@@ -811,39 +811,22 @@
   function stopRecording() {
     isRecording = false;
     micBtn.classList.remove('recording');
-    micIcon.innerHTML = `<svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5-3c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>`;
-    stopVoiceAnimation();
+    micBtn.textContent = '🎤';
+    ring1.classList.remove('active');
+    ring2.classList.remove('active');
+    volBar.style.opacity = '0';
     if (recognition) { try { recognition.stop(); } catch(e){} }
   }
 
-  // Active Soundwave Rendering Loop
-  function startVoiceAnimation(mode) {
-    bgWave.className = 'background-wave active ' + mode;
-    animateVolBars();
-  }
-
-  function stopVoiceAnimation() {
-    bgWave.className = 'background-wave';
-    if (animationFrameId) {
-      cancelAnimationFrame(animationFrameId);
-    }
-    // Smooth reset heights
-    const bars = ['v1','v2','v3','v4','v5','v6','v7'];
-    bars.forEach(id => {
-      document.getElementById(id).style.height = '6px';
-    });
-  }
-
+  // Fake volume animation while recording
   function animateVolBars() {
-    if (!bgWave.classList.contains('active')) return;
+    if (!isRecording) return;
     const bars = ['v1','v2','v3','v4','v5','v6','v7'];
     bars.forEach(id => {
-      // Scale dynamic voice variations organically up to 85px max
-      const heightMultiplier = bgWave.classList.contains('speaking') ? 60 : 80;
-      const h = 6 + Math.random() * heightMultiplier;
+      const h = 4 + Math.random() * 18;
       document.getElementById(id).style.height = h + 'px';
     });
-    animationFrameId = requestAnimationFrame(animateVolBars);
+    requestAnimationFrame(animateVolBars);
   }
 
   // Text send
